@@ -16,13 +16,16 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
   late AnimationController flipController;
   late Animation<double> flipAnimation;
 
+  //? milliseconds
+  final animationDuration = 500;
+
   @override
   void initState() {
     super.initState();
     //? rotation animation
     rotationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: animationDuration),
     );
     rotationAnimation = Tween<double>(
       begin: 0,
@@ -37,7 +40,7 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
     //? flip animation
     flipController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: animationDuration),
     );
 
     flipAnimation = Tween<double>(
@@ -98,7 +101,7 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(Duration(milliseconds: animationDuration), () {
       rotationController
         ..reset()
         ..forward();
@@ -124,7 +127,8 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
                             alignment: Alignment.centerRight,
                             child: ClipPath(
                               clipper: const HalfCircleClipper(
-                                  side: CircleSide.left),
+                                side: CircleSide.left,
+                              ),
                               child: Container(
                                 height: 200,
                                 width: 200,
