@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vandad_animation_course/example_1_rotate_box.dart';
 
 import 'example_2_circle_loader.dart';
+import 'example_3_3d_animation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,6 +44,10 @@ class MyHomePage extends StatelessWidget {
             PageButton(
               page: Example2(),
               text: 'Example2: Circle loader',
+            ),
+            PageButton(
+              page: Example3(),
+              text: 'Example3: 3D Animation',
             ),
           ],
         ),
