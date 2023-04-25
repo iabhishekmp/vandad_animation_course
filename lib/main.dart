@@ -5,6 +5,7 @@ import 'example_2_circle_loader.dart';
 import 'example_3_3d_animation.dart';
 import 'example_4_hero_animation.dart';
 import 'example_5_implicit_animation.dart';
+import 'example_6_tween_and_custom_clipper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,6 +59,10 @@ class MyHomePage extends StatelessWidget {
             PageButton(
               page: Example5(),
               text: 'Example5: Implicit Animation',
+            ),
+            PageButton(
+              page: Example6(),
+              text: 'Example6: TweenAnimationBuilder & CustomClipper',
             ),
           ],
         ),
