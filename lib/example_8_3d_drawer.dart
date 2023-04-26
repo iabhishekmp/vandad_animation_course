@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' show pi;
 
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class Example8 extends StatelessWidget {
         child: ColoredBox(
           color: const Color(0xff24283b),
           child: ListView.builder(
-            padding: const EdgeInsets.only(left: 80, top: 100),
+            padding: const EdgeInsets.only(left: 100, top: 100),
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
@@ -89,16 +90,19 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final maxDrag = screenWidth * 0.7;
+    final maxDrag = screenWidth * 0.8;
 
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
         final delta = details.delta.dx / maxDrag;
         childAnimationController.value += delta;
         drawerAnimationController.value += delta;
+
+        log(childAnimationController.value.toString());
+        log(drawerAnimationController.value.toString());
       },
       onHorizontalDragEnd: (details) {
-        if (childAnimationController.value < 0.3) {
+        if (childAnimationController.value < 0.5) {
           childAnimationController.reverse();
           drawerAnimationController.reverse();
         } else {
@@ -119,6 +123,7 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
 
                 //? middle
                 Transform(
+                  alignment: Alignment.centerLeft,
                   transform: Matrix4.identity()
                     ..setEntry(3, 2, 0.001)
                     ..translate(childAnimationController.value * maxDrag)
@@ -128,6 +133,7 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
 
                 //? top
                 Transform(
+                  alignment: Alignment.centerRight,
                   transform: Matrix4.identity()
                     ..setEntry(3, 2, 0.001)
                     ..translate(-screenWidth +
