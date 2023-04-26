@@ -7,6 +7,7 @@ import 'example_4_hero_animation.dart';
 import 'example_5_implicit_animation.dart';
 import 'example_6_tween_and_custom_clipper.dart';
 import 'example_7_custom_painter_and_polygon.dart';
+import 'example_8_3d_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,6 +69,10 @@ class MyHomePage extends StatelessWidget {
             PageButton(
               page: Example7(),
               text: 'Example7: Custom painter & polygons',
+            ),
+            PageButton(
+              page: Example8(),
+              text: 'Example8: 3D Drawer',
             ),
           ],
         ),
