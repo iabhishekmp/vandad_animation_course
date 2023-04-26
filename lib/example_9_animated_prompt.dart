@@ -62,7 +62,7 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
     );
 
     iconScaleAnimation = Tween<double>(
-      begin: 7,
+      begin: 7.5,
       end: 6,
     ).animate(
       CurvedAnimation(
@@ -72,7 +72,7 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
     );
 
     containerScaleAnimation = Tween<double>(
-      begin: 2,
+      begin: 3,
       end: 0.4,
     ).animate(
       CurvedAnimation(
@@ -90,30 +90,22 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
 
   @override
   Widget build(BuildContext context) {
-    controller.repeat();
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minHeight: 100,
-            minWidth: 100,
-            maxHeight: 500,
-            maxWidth: 500,
-          ),
-          child: Stack(
-            children: [
-              //? behind: 1st child
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+    controller.forward();
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Stack(
+        children: [
+          //? behind: 1st child
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
                   children: [
-                    const SizedBox(height: 160),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.6),
                     Text(
                       widget.title,
                       textAlign: TextAlign.center,
@@ -135,30 +127,30 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
                     ),
                   ],
                 ),
-              ),
+              ],
+            ),
+          ),
 
-              //? top: 2nd child
-              Positioned.fill(
-                child: SlideTransition(
-                  position: yAnimation,
+          //? top: 2nd child
+          Positioned.fill(
+            child: SlideTransition(
+              position: yAnimation,
+              child: ScaleTransition(
+                scale: containerScaleAnimation,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                  ),
                   child: ScaleTransition(
-                    scale: containerScaleAnimation,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
-                      ),
-                      child: ScaleTransition(
-                        scale: iconScaleAnimation,
-                        child: widget.child,
-                      ),
-                    ),
+                    scale: iconScaleAnimation,
+                    child: widget.child,
                   ),
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
